@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1.Page1">
+  <ContentPage.Content>
+    <StackLayout>
+      <Button Text="TakePhoto" Clicked="onTakePhoto"></Button>
+      <Image x:Name="image"></Image>
+      <ListView x:Name="lstImages" HasUnevenRows="True" ItemsSource="{Binding .}" RowHeight="150">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Image Source="{Binding ImageUrl}"></Image>
+              <ViewCell.ContextActions>
+                <MenuItem Clicked="OnOpen"
+                   Text="Open" IsDestructive="True" />
+              </ViewCell.ContextActions>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>
