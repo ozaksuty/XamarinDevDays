@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using Plugin.LocalNotifications;
 using Plugin.Media;
 using Plugin.Share;
 using System;
@@ -56,6 +57,8 @@ namespace App1
             if (result.Result)
             {
                 UserDialogs.Instance.HideLoading();
+                CrossLocalNotifications.Current.Show("Tebrikler!",
+                     "Fotoğraf yüklemeniz başarılı bir şekilde gerçekleşti");
                 model.Add(new ImageList
                 {
                     ImageUrl = url + App.ImageName

@@ -22,10 +22,25 @@ namespace App1.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            var settings = UIUserNotificationSettings.GetSettingsForTypes(
+                       UIUserNotificationType.Alert | UIUserNotificationType.Badge |
+                       UIUserNotificationType.Sound, new NSSet());
+
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            if (UIApplication.SharedApplication.ApplicationState == UIApplicationState.Active)
+            {
+                //new UIAlertView(notification.AlertAction, notification.AlertBody, null, "Ok", null).Show();
+                var alert = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.ActionSheet);
+                UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+            }
         }
     }
 }
